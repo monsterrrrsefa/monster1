@@ -1,0 +1,38 @@
+# Gerekli Kütüphane ve Fonksiyonlar
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import GridSearchCV, cross_validate
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from catboost import CatBoostClassifier
+from lightgbm import LGBMClassifier
+from xgboost import XGBClassifier
+
+
+import warnings
+warnings.simplefilter(action="ignore")
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', 300)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.float_format', lambda x: '%.3f' % x)
+
+df = pd.read_csv("Case_1_Telco_Churn/Telco-Customer-Churn.csv")
+df.head()
+df.shape
+df.info()
+
+# TotalCharges sayısal bir değişken olmalı
+df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors='coerce')
+# df["TotalCharges"][486:490]
+
+df["Churn"] = df["Churn"].apply(lambda x: 1 if x == "Yes" else 0)
+
+df.head()
+
+##################################
